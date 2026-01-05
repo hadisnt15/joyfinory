@@ -29,7 +29,7 @@
         @include('components.layouts.footer')
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-        <script src="//unpkg.com/alpinejs" defer></script>
+        
 
     </body>
 </html>
