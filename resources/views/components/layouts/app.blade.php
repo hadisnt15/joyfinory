@@ -23,6 +23,7 @@
         @include('components.layouts.header')
         
         <div class="mx-auto max-w-7xl h-[840px] ">
+            <div class="flex flex-wrap items-center text-xs mt-2 font-medium text-gray-800 justify-center">Built with Love, from <span class="font-bold">&nbsp;Hadi</span>, for <span class="font-bold">&nbsp;Dini</span>.</div>
             {{ $slot }}
         </div>
 

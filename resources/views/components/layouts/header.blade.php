@@ -112,6 +112,7 @@
             </li>
 
             <!-- Galeri -->
+            @if(auth()->user()->id != 1)
             <li class="relative group ml-4">
               <button
                 class="inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800"
@@ -147,6 +148,7 @@
                 </li>
               </ul>
             </li>
+            @endif
           </ol>
         </div>
 
@@ -256,7 +258,7 @@
                 </ul>
               </details>
             </li>
-
+            @if(auth()->user()->id != 1)
             <li>
               <details class="group">
                 <summary
@@ -282,6 +284,7 @@
                 </ul>
               </details>
             </li>
+            @endif
 
             <li class="border-t border-default-medium mt-2 pt-2">
               <form action="{{ route('logout') }}" method="post" class="flex items-center space-x-2 px-3">
