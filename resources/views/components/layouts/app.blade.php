@@ -21,11 +21,14 @@
     </head>
     <body class="">
         @include('components.layouts.header')
-        
-        <main class="mx-auto max-w-7xl min-h-screen pt-20 pb-2 px-4">
-            {{ $slot }}
-        </main>
-        @include('components.layouts.footer')
+
+        <div class="flex flex-col min-h-screen pt-20">
+            <main class="flex-1">
+                {{ $slot }}
+            </main>
+
+            @include('components.layouts.footer')
+        </div>
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
         

@@ -1,5 +1,5 @@
 <div>
-    <div class="p-4">
+    <div class="p-4 mx-auto max-w-7xl">
         @if (session()->has('success'))
             <div class="p-2 mb-3 bg-green-100 text-green-600 rounded">
                 {{ session('success') }}

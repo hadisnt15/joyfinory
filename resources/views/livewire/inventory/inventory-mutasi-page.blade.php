@@ -1,5 +1,5 @@
 <div>
-    <div class="p-4">
+    <div class="p-4 mx-auto max-w-7xl">
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
