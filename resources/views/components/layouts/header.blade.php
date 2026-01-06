@@ -290,7 +290,11 @@
 
     </div>
   </nav>
-  <div class="flex flex-wrap items-center text-xs px-2 font-medium text-gray-800 justify-center bg-white">Built with Love, from <span class="font-bold">&nbsp;Hadi</span>, for <span class="font-bold">&nbsp;Dini</span>.</div>
+  @auth
+    <div class="flex flex-wrap items-center text-xs px-2 font-medium text-gray-800 justify-center bg-white">
+      Built with Love, from <span class="font-bold">&nbsp;Hadi</span>, for <span class="font-bold">&nbsp;Dini</span>.
+    </div>
+  @endauth
   <script>
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');
