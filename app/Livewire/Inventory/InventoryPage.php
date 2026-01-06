@@ -144,7 +144,7 @@ class InventoryPage extends Component
     public function render()
     {
         return view('livewire.inventory.inventory-page', [
-            'inventories' => Inventory::with('inventorySources')->where('user_id', Auth::id())
+            'inventories' => Inventory::with(['inventorySources','inventoryItems.itemCategories'])->where('user_id', Auth::id())
             ->orderBy('date','desc')
             ->orderBy('id','desc')
             ->paginate(20)

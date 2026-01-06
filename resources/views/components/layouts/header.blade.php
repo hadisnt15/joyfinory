@@ -1,4 +1,4 @@
-<header class="antialiased">
+<header class="antialiased fixed top-0 left-0 w-full z-50">
   <nav class="bg-white border-gray-200 px-4 lg:px-6 py-3 dark:bg-gray-800">
     <div class="max-w-7xl mx-auto">
 
@@ -290,7 +290,7 @@
 
     </div>
   </nav>
-
+  <div class="flex flex-wrap items-center text-xs px-2 font-medium text-gray-800 justify-center bg-white">Built with Love, from <span class="font-bold">&nbsp;Hadi</span>, for <span class="font-bold">&nbsp;Dini</span>.</div>
   <script>
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');

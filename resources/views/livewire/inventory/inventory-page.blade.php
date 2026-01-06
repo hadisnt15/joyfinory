@@ -109,10 +109,9 @@
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0 z-20">
                                     <tr>
                                         <th scope="col" class="px-3 py-3">#</th>
-                                        <th scope="col" class="px-3 py-3">Tanggal</th>
-                                        <th scope="col" class="px-3 py-3">Persediaan</th>
+                                        <th scope="col" class="px-3 py-3">Memo Persediaan</th>
                                         <th scope="col" class="px-3 py-3">Jumlah</th>
-                                        <th scope="col" class="px-3 py-3 text-center">Aksi</th>
+                                        {{-- <th scope="col" class="px-3 py-3 text-center">Aksi</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,32 +126,29 @@
                                                 @else
                                                     <span class="text-green-600 font-semibold text-xs">Penjualan</span>
                                                 @endif
-                                                <br>
-                                                {{ $f->date }} 
+                                                <br>{{ $f->date }} 
+                                                <span class="text-xs text-white font-semibold">{{ $f->inventorySources->item_source_name }}</span> 
+                                                <br><span class="text-xs text-white font-semibold">{{ $f->inventoryItems->item_name }} ({{ $f->inventoryItems->itemCategories->item_category_name }})</span>
+                                                <br><span class="text-xs">Ket: {{ $f->desc }}</span>
                                             </th>
-                                            <td class="px-3">
-                                                <span class="text-xs text-white font-semibold">{{ $f->inventorySources->item_source_name }}</span> <br>
-                                                <span class="text-xs text-white font-semibold">{{ $f->inventoryItems->item_name }}</span> -
-                                                <span class="text-xs">Ket: {{ $f->desc }}</span>
-                                            </td>
                                             <td class="px-3 text-right">
                                                 @if ($f->type === 'beli')
-                                                    <span class="text-yellow-600 font-semibold text-sm">Rp{{ number_format($f->quantity*$f->unit_price) }}</span><br>
-                                                    <span class="text-white text-xs">Kuantitas: {{ number_format($f->quantity) }} {{$f->inventoryItems->item_uom}}</span><br>
-                                                    <span class="text-white text-xs">Harga Satuan: Rp{{ number_format($f->unit_price) }}</span>
+                                                <span class="text-white text-xs">{{ number_format($f->quantity) }} {{$f->inventoryItems->item_uom}}</span><br>
+                                                <span class="text-white text-xs">@ Rp{{ number_format($f->unit_price) }}</span><br>
+                                                <span class="text-yellow-600 font-semibold text-xs">Rp{{ number_format($f->quantity*$f->unit_price) }}</span>
                                                 @else
-                                                    <span class="text-green-600 font-semibold text-sm">Rp{{ number_format($f->quantity*$f->unit_price) }}</span><br>
-                                                    <span class="text-white text-xs">Kuantitas: {{ number_format($f->quantity) }} {{$f->inventoryItems->item_uom}}</span><br>
-                                                    <span class="text-white text-xs">Harga Satuan: Rp{{ number_format($f->unit_price) }}</span>
+                                                <span class="text-white text-xs">Kuantitas: {{ number_format($f->quantity) }} {{$f->inventoryItems->item_uom}}</span><br>
+                                                <span class="text-white text-xs">Harga Satuan: Rp{{ number_format($f->unit_price) }}</span><br>
+                                                <span class="text-green-600 font-semibold text-xs">Rp{{ number_format($f->quantity*$f->unit_price) }}</span>
                                                 @endif
                                             </td>
-                                            <td class="px-3">
+                                            {{-- <td class="px-3">
                                                 <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
                                                     <li>
                                                         <button wire:click="edit({{ $f->id }})" class="text-white bg-warning box-border border border-transparent hover:bg-warning-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-md text-xs px-1.5 py-1 focus:outline-none"><i class="ri-edit-circle-fill"></i></button>
                                                     </li>
                                                 </ul>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

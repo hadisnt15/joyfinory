@@ -58,6 +58,7 @@ class FinanceMutasiPage extends Component
             'mutasi' => $mutasi,
             'totalIn' => $mutasi->flatten(1)->sum('masuk'),
             'totalOut' => $mutasi->flatten(1)->sum('keluar'),
+            'closingBalance' => $runningBalance,
         ])
         ->layout('components.layouts.app', [
             'title' => 'JoyFinory - Mutasi Keuangan'

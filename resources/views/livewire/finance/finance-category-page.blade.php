@@ -64,7 +64,7 @@
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0 z-20">
                                     <tr>
                                         <th scope="col" class="px-3 py-3">#</th>
-                                        <th scope="col" class="px-3 py-3">Kategori</th>
+                                        <th scope="col" class="px-3 py-3">Kategori Keuangan</th>
                                         <th scope="col" class="px-3 py-3 text-center">Aksi</th>
                                     </tr>
                                 </thead>

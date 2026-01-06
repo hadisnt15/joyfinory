@@ -64,8 +64,7 @@
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0 z-20">
                                     <tr>
                                         <th scope="col" class="px-3 py-3">#</th>
-                                        <th scope="col" class="px-3 py-3">Nama Kategori Persediaan</th>
-                                        <th scope="col" class="px-3 py-3">Deskripsi Kategori Persediaan</th>
+                                        <th scope="col" class="px-3 py-3">Kategori Persediaan</th>
                                         <th scope="col" class="px-3 py-3 text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -81,11 +80,9 @@
                                                     <span class="text-green-700 font-medium bg-gray-200 p-1 rounded-md text-xs ms-1">Aktif</span>
                                                 @else
                                                     <span class="text-red-700 font-medium bg-gray-200 p-1 rounded-md text-xs ms-1">Tidak Aktif</span>
-                                                @endif
+                                                @endif <br>
+                                                Ket: {{ $ic->item_category_description }}
                                             </th>
-                                            <td class="px-3">
-                                                {{ $ic->item_category_description }}
-                                            </td>
                                             <td class="px-3">
                                                 <button wire:click="editItemCategory({{ $ic->id }})" class="text-white bg-warning box-border border border-transparent hover:bg-warning-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-md text-xs px-1.5 py-1 focus:outline-none">
                                                     <i class="ri-edit-circle-fill"></i>
