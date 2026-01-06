@@ -22,7 +22,7 @@
 
                                     <span id="countdown"
                                         class="font-bold text-pink-500 whitespace-nowrap mx-1 inline-block transition-all duration-300">
-                                        3 hari 11 jam 49 menit 25 detik
+                                        
                                     </span>
                                 </div>
 
@@ -57,7 +57,7 @@
     const countdownEl = document.getElementById('countdown');
 
     // TARGET ULANG TAHUN (WITA)
-    const targetDate = new Date('2026-01-15T00:00:00+08:00');
+    const targetDate = new Date('2026-01-10T00:00:00+08:00');
 
     function updateCountdown() {
         const now = new Date();
