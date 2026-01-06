@@ -17,13 +17,13 @@
                     </div>
                     <!-- Modal body -->
                     <div class="gap-2 overflow-y-auto max-h-[660px] relative z-10 pe-2">
-                        <div class=" mb-4">
+                        {{-- <div class=" mb-4">
                             <label class="block py-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal</label>
                             <input wire:model.live="date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                             <div>
                                 @error('date') <span class="text-red-700">{{ $message }}</span> @enderror 
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="mb-4 grid grid-cols-[1fr_2fr]">
                             <div class="p-1">
                                 <label class="block py-2 text-sm font-medium text-gray-900 dark:text-white">Tipe</label>

@@ -17,10 +17,10 @@
                     </div>
                     <!-- Modal body -->
                     <div class="gap-4 relative z-10">
-                        <div class=" mb-4">
+                        {{-- <div class=" mb-4">
                             <label class="block py-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal</label>
                             <input wire:model="date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
-                        </div>
+                        </div> --}}
                         <div class="mb-4 grid grid-cols-[1fr_2fr]">
                             <div class="p-1">
                                 <label class="block py-2 text-sm font-medium text-gray-900 dark:text-white">Tipe</label>
@@ -76,10 +76,9 @@
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0 z-20">
                                     <tr>
                                         <th scope="col" class="px-3 py-3">#</th>
-                                        <th scope="col" class="px-3 py-3">Tanggal</th>
-                                        <th scope="col" class="px-3 py-3">Kategori</th>
+                                        <th scope="col" class="px-3 py-3">Catatan</th>
                                         <th scope="col" class="px-3 py-3">Jumlah</th>
-                                        <th scope="col" class="px-3 py-3 text-center">Aksi</th>
+                                        {{-- <th scope="col" class="px-3 py-3 text-center">Aksi</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,13 +93,10 @@
                                                 @else
                                                     <span class="text-red-600 font-semibold text-xs">Pengeluaran</span>
                                                 @endif
-                                                <br>
-                                                {{ $f->date }} 
+                                                <br>{{ $f->date }} 
+                                                <br>{{ $f->financeCategories->category_name }} 
+                                                <br><span class="text-xs">Ket: {{ $f->desc }}</span>
                                             </th>
-                                            <td class="px-3">
-                                                {{ $f->financeCategories->category_name }} <br>
-                                                <span class="text-xs">Ket: {{ $f->desc }}</span>
-                                            </td>
                                             <td class="px-3">
                                                 @if ($f->type === 'in')
                                                     <span class="text-green-600 font-semibold text-xs">{{ number_format($f->amount) }}</span>
@@ -108,16 +104,16 @@
                                                     <span class="text-red-600 font-semibold text-xs">{{ number_format($f->amount) }}</span>
                                                 @endif
                                             </td>
-                                            <td class="px-3">
+                                            {{-- <td class="px-3">
                                                 <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
                                                     <li>
                                                         <button wire:click="edit({{ $f->id }})" class="text-white bg-warning box-border border border-transparent hover:bg-warning-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-md text-xs px-1.5 py-1 focus:outline-none"><i class="ri-edit-circle-fill"></i></button>
                                                     </li>
-                                                    {{-- <li>
+                                                    <li>
                                                         <button wire:click="delete({{ $f->id }})" class="block px-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
-                                                    </li> --}}
+                                                    </li>
                                                 </ul>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

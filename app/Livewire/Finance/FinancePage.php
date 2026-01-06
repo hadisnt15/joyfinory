@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Finance;
 
-use App\Models\Finance\Finance;
 use Livewire\Component;
-use App\Models\Finance\FinanceCategory;
 use Livewire\WithPagination;
+use Illuminate\Support\Carbon;
+use App\Models\Finance\Finance;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Finance\FinanceCategory;
 
 class FinancePage extends Component
 {
@@ -21,7 +22,7 @@ class FinancePage extends Component
     public $isEdit = false;
     
     public $rules = [
-        'date' => 'required|date',
+        // 'date' => 'required|date',
         'type' => 'required|in:in,out',
         'category_id' => 'required|exists:finance_categories,id',
         'desc' => 'required|string',
@@ -65,7 +66,7 @@ class FinancePage extends Component
             ['id' => $this->financeId],
             [
                 'user_id' => Auth::id(),
-                'date' => $this->date,
+                'date' => now(),
                 'type' => $this->type,
                 'category_id' => $this->category_id,
                 'desc' => $this->desc,

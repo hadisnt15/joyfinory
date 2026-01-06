@@ -21,69 +21,96 @@
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-white uppercase bg-gray-700 sticky top-0 z-20">
                             <tr>
-                                <th scope="col" class="px-3 py-3">#</th>
-                                <th scope="col" class="px-3 py-3">Tanggal</th>
-                                <th scope="col" class="px-3 py-3">Kategori</th>
-                                <th scope="col" class="px-3 py-3">Deskripsi</th>
-                                <th scope="col" class="px-3 py-3 text-right">Masuk</th>
-                                <th scope="col" class="px-3 py-3 text-right">Keluar</th>
-                                <th scope="col" class="px-3 py-3 text-right">Saldo</th>
+                                <th class="px-3 py-3">#</th>
+                                <th class="px-3 py-3">Tanggal</th>
+                                <th class="px-3 py-3">Kategori</th>
+                                <th class="px-3 py-3">Deskripsi</th>
+                                <th class="px-3 py-3 text-right">Masuk</th>
+                                <th class="px-3 py-3 text-right">Keluar</th>
+                                <th class="px-3 py-3 text-right">Saldo</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr>
-                                <td class="px-3 py-2 font-bold text-white" colspan="6">
+                            {{-- SALDO AWAL --}}
+                            <tr class="bg-gray-800">
+                                <td colspan="6" class="px-3 py-2 font-bold text-white">
                                     Saldo Awal
                                 </td>
                                 <td class="px-3 py-2 font-bold text-white text-right">
                                     {{ number_format($openingBalance,0,',','.') }}
                                 </td>
                             </tr>
-                            @forelse ($mutasi as $m)
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="px-3">
-                                        {{ $loop->iteration }} <br>
-                                    </td>
-                                    <td scope="row" class="px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white py-3">
-                                        {{ \Carbon\Carbon::parse($m['date'])->format('d/m/Y') }}
-                                    </td>
-                                    <td class="px-3">
-                                        {{ $m['category'] }}
-                                    </td>
-                                    <td class="px-3">
-                                        {{ $m['desc'] }}
-                                    </td>
-                                    <td class="px-3 text-right text-green-600">
-                                        {{ $m['masuk'] ? number_format($m['masuk'],0,',','.') : '-' }}
-                                    </td>
-                                    <td class="px-3 text-right text-red-600">
-                                        {{ $m['keluar'] ? number_format($m['keluar'],0,',','.') : '-' }}
-                                    </td>
-                                    <td class="px-3 text-right text-white font-semibold">
-                                        {{ number_format($m['saldo'],0,',','.') }}
+
+                            @php $no = 1; @endphp
+
+                            @forelse ($mutasi as $tanggal => $items)
+
+                                {{-- HEADER TANGGAL --}}
+                                <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <td colspan="7" class="px-3 py-2 font-bold text-gray-800 dark:text-white">
+                                        {{ \Carbon\Carbon::parse($tanggal)->translatedFormat('d F Y') }}
                                     </td>
                                 </tr>
+
+                                @foreach ($items as $m)
+                                    <tr class="border-b dark:border-gray-700">
+                                        <td class="px-3">
+                                            {{ $no++ }}
+                                        </td>
+
+                                        {{-- TANGGAL + JAM --}}
+                                        <td class="px-3 py-2 font-medium text-gray-900 dark:text-white">
+                                            {{ $m['waktu'] }}
+                                        </td>
+
+                                        <td class="px-3">
+                                            {{ $m['category'] }}
+                                        </td>
+
+                                        <td class="px-3">
+                                            {{ $m['desc'] }}
+                                        </td>
+
+                                        <td class="px-3 text-right text-green-600">
+                                            {{ $m['masuk'] ? number_format($m['masuk'],0,',','.') : '-' }}
+                                        </td>
+
+                                        <td class="px-3 text-right text-red-600">
+                                            {{ $m['keluar'] ? number_format($m['keluar'],0,',','.') : '-' }}
+                                        </td>
+
+                                        <td class="px-3 text-right font-semibold text-white">
+                                            {{ number_format($m['saldo'],0,',','.') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
                             @empty
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="px-3" colspan="7">
+                                <tr>
+                                    <td colspan="7" class="px-3 py-4 text-center">
                                         Tidak ada catatan keuangan.
                                     </td>
                                 </tr>
                             @endforelse
                         </tbody>
+
                         <tfoot class="uppercase bg-gray-700">
-                            <td class="px-3 py-2 font-bold text-white text-center" colspan="4">
-                                Total
-                            </td>
-                            <td class="px-3 py-2 font-bold text-white text-right">
-                                {{ number_format($totalIn,0,',','.') }}
-                            </td>
-                            <td class="px-3 py-2 font-bold text-white text-right">
-                                {{ number_format($totalOut,0,',','.') }}
-                            </td>
-                            <td></td>
+                            <tr>
+                                <td colspan="4" class="px-3 py-2 font-bold text-white text-center">
+                                    Total
+                                </td>
+                                <td class="px-3 py-2 font-bold text-white text-right">
+                                    {{ number_format($totalIn,0,',','.') }}
+                                </td>
+                                <td class="px-3 py-2 font-bold text-white text-right">
+                                    {{ number_format($totalOut,0,',','.') }}
+                                </td>
+                                <td></td>
+                            </tr>
                         </tfoot>
                     </table>
+
                 </div>
             </div>
         </div>

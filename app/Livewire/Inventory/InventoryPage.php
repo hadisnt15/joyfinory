@@ -18,8 +18,8 @@ class InventoryPage extends Component
     public $inventoryId;
     public $inventoryType;
 
-    #[Validate('required|date')]
-    public $date;
+    // #[Validate('required|date')]
+    // public $date;
     
     #[Validate('required')]
     public $type;
@@ -74,7 +74,7 @@ class InventoryPage extends Component
     {
         $this->reset([
             'inventoryId',
-            'date',
+            // 'date',
             'type',
             'item_id',
             'item_source_id',
@@ -94,7 +94,7 @@ class InventoryPage extends Component
             ['id' => $this->inventoryId],
             [
                 'user_id' => Auth::id(),
-                'date' => $this->date,
+                'date' => now(),
                 'type' => $this->type,
                 'item_id' => $this->item_id,
                 'item_source_id' => $this->item_source_id,
@@ -112,7 +112,7 @@ class InventoryPage extends Component
             ['inventory_id' => $this->inventoryId],
             [
                 'user_id' => Auth::id(),
-                'date' => $this->date,
+                'date' => now(),
                 'type' => $flowType,//$this->inventoryType === 'jual' ? 'in' : 'out',
                 'category_id' => $this->inventoryType === 'jual' ? 6 : 9,
                 'desc' => $this->desc,

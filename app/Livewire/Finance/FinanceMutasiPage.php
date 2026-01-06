@@ -19,44 +19,49 @@ class FinanceMutasiPage extends Component
 
     public function render()
     {
-        $openingBalanceQuery = Finance::where('user_id', Auth::id())->where('date', '<', $this->startDate);
+        $openingBalanceQuery = Finance::where('user_id', Auth::id())
+            ->where('date', '<', $this->startDate);
 
         $totalInBefore = (clone $openingBalanceQuery)->where('type', 'in')->sum('amount');
         $totalOutBefore = (clone $openingBalanceQuery)->where('type', 'out')->sum('amount');
 
         $openingBalance = $totalInBefore - $totalOutBefore;
 
-        $query = Finance::with('financeCategories')->where('user_id', Auth::id())->whereBetween('date', [$this->startDate, $this->endDate])->orderBy('id');
-
-        $rows = $query->get();
+        $rows = Finance::with('financeCategories')
+            ->where('user_id', Auth::id())
+            ->whereBetween('date', [$this->startDate, $this->endDate])
+            ->orderBy('date') // penting
+            ->get();
 
         $runningBalance = $openingBalance;
 
         $mutasi = $rows->map(function ($item) use (&$runningBalance) {
-            if ($item->type == 'in') {
-                $runningBalance += $item->amount;
-            } else {
-                $runningBalance -= $item->amount;
-            }
+            $runningBalance += $item->type === 'in'
+                ? $item->amount
+                : -$item->amount;
 
             return [
-                'date' => $item->date,
-                'category' => $item->financeCategories->category_name,
+                'date' => $item->date, // full datetime
+                'tanggal' => \Carbon\Carbon::parse($item->date)->format('Y-m-d'),
+                'waktu' => \Carbon\Carbon::parse($item->date)->format('H:i'),
+                'category' => $item->financeCategories->category_name ?? '-',
                 'desc' => $item->desc,
-                'masuk' => $item->type == 'in' ? $item->amount : 0,
-                'keluar' => $item->type == 'out' ? $item->amount : 0,
-                'saldo' => $runningBalance
+                'masuk' => $item->type === 'in' ? $item->amount : 0,
+                'keluar' => $item->type === 'out' ? $item->amount : 0,
+                'saldo' => $runningBalance,
             ];
-        });
+        })
+        ->groupBy('tanggal'); // 🔥 grouping di sini
 
         return view('livewire.finance.finance-mutasi-page', [
             'openingBalance' => $openingBalance,
             'mutasi' => $mutasi,
-            'totalIn' => $mutasi->sum('masuk'),
-            'totalOut' => $mutasi->sum('keluar'),
+            'totalIn' => $mutasi->flatten(1)->sum('masuk'),
+            'totalOut' => $mutasi->flatten(1)->sum('keluar'),
         ])
         ->layout('components.layouts.app', [
             'title' => 'JoyFinory - Mutasi Keuangan'
-        ]);;
+        ]);
     }
+
 }

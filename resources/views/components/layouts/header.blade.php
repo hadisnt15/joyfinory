@@ -17,139 +17,124 @@
         @auth
         <div class="hidden lg:flex flex-1 justify-center">
           <ol class="inline-flex items-center mb-0">
-            <!-- Keuangan -->
-            <li class="relative group">
+
+            <!-- ================= KEUANGAN ================= -->
+            <li class="relative">
               <button
-                class="inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800"
                 type="button"
+                data-dropdown="keuangan"
+                class="dropdown-btn inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800 transition"
               >
-                <i class="ri-wallet-3-fill"></i>Keuangan
-                <svg
-                  class="w-3.5 h-3.5 ms-1.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <i class="ri-wallet-3-fill"></i>
+                <span class="ml-1">Keuangan</span>
+                <svg class="w-3.5 h-3.5 ms-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="m19 9-7 7-7-7" />
                 </svg>
               </button>
+
               <ul
-                class="absolute left-0 mt-1 hidden group-hover:block bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-46 text-sm text-body font-medium z-50"
+                data-menu="keuangan"
+                class="absolute left-0 mt-1 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-48 text-sm text-body font-medium z-50"
               >
                 <li>
-                  <a href="{{ route('finance.category') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('finance.category') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-checkbox-multiple-blank-fill"></i> Kategori Keuangan
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('finance.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('finance.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-edit-box-fill"></i> Catatan Keuangan
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('finance.mutasi') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('finance.mutasi') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-exchange-box-fill"></i> Mutasi Keuangan
                   </a>
                 </li>
               </ul>
             </li>
 
-            <!-- Persediaan -->
-            <li class="relative group ml-4">
+            <!-- ================= PERSEDIAAN ================= -->
+            <li class="relative ml-4">
               <button
-                class="inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800"
                 type="button"
+                data-dropdown="persediaan"
+                class="dropdown-btn inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800 transition"
               >
-                <i class="ri-token-swap-fill"></i>Persediaan
-                <svg
-                  class="w-3.5 h-3.5 ms-1.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <i class="ri-token-swap-fill"></i>
+                <span class="ml-1">Persediaan</span>
+                <svg class="w-3.5 h-3.5 ms-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="m19 9-7 7-7-7" />
                 </svg>
               </button>
+
               <ul
-                class="absolute left-0 mt-1 hidden group-hover:block bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-46 text-sm text-body font-medium z-50"
+                data-menu="persediaan"
+                class="absolute left-0 mt-1 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-52 text-sm text-body font-medium z-50"
               >
                 <li>
-                  <a href="{{ route('item.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('item.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-gradienter-fill"></i> Daftar Persediaan
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('item.category') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('item.category') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-global-fill"></i> Kategori Persediaan
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('item.source') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('item.source') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-app-store-fill"></i> Mitra Persediaan
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('inventory.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('inventory.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-edit-circle-fill"></i> Catatan Persediaan
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('inventory.mutasi') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('inventory.mutasi') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-exchange-fill"></i> Mutasi Persediaan
                   </a>
                 </li>
               </ul>
             </li>
 
-            <!-- Galeri -->
+            <!-- ================= GALERI ================= -->
             @if(auth()->user()->id != 1)
-            <li class="relative group ml-4">
+            <li class="relative ml-4">
               <button
-                class="inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800"
                 type="button"
+                data-dropdown="galeri"
+                class="dropdown-btn inline-flex items-center text-white font-semibold rounded-md text-sm px-3 py-2 hover:bg-gray-300 hover:text-gray-800 transition"
               >
-                <i class="ri-gallery-fill"></i>Galeri
-                <svg
-                  class="w-3.5 h-3.5 ms-1.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <i class="ri-gallery-fill"></i>
+                <span class="ml-1">Galeri</span>
+                <svg class="w-3.5 h-3.5 ms-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="m19 9-7 7-7-7" />
                 </svg>
               </button>
+
               <ul
-                class="absolute left-0 mt-1 hidden group-hover:block bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-46 text-sm text-body font-medium z-50"
+                data-menu="galeri"
+                class="absolute left-0 mt-1 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-48 text-sm text-body font-medium z-50"
               >
                 <li>
-                  <a href="{{ route('gallery.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('gallery.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-gradienter-fill"></i> Daftar Galeri
                   </a>
                 </li>
                 <li>
-                  <a href="{{ route('laughtale.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">
+                  <a href="{{ route('laughtale.index') }}" class="block p-2 hover:bg-neutral-tertiary-medium rounded-md">
                     <i class="ri-hearts-fill"></i> Our Laughtales
                   </a>
                 </li>
               </ul>
             </li>
             @endif
+
           </ol>
+
         </div>
 
         <!-- User & Logout -->
@@ -313,6 +298,36 @@
 
     mobileMenuButton.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+
+    // desktop
+      document.addEventListener('DOMContentLoaded', () => {
+
+        const buttons = document.querySelectorAll('.dropdown-btn');
+        const menus = document.querySelectorAll('[data-menu]');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                const target = button.dataset.dropdown;
+                const menu = document.querySelector(`[data-menu="${target}"]`);
+
+                // Tutup dropdown lain
+                menus.forEach(m => {
+                    if (m !== menu) m.classList.add('hidden');
+                });
+
+                // Toggle dropdown aktif
+                menu.classList.toggle('hidden');
+            });
+        });
+
+        // Klik di luar dropdown → tutup semua
+        document.addEventListener('click', () => {
+            menus.forEach(menu => menu.classList.add('hidden'));
+        });
+
     });
   </script>
 </header>
