@@ -1,0 +1,14 @@
+.group.active img {
+    transform: scale(1.10);
+    transition: transform 0.5s ease-in-out;
+}
+
+.group.active div.absolute {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.group.active h3, .group.active p {
+    transform: translateY(0);
+    transition: transform 0.5s ease;
+}

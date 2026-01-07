@@ -10,6 +10,7 @@
         <link rel="icon" href="https://flowbite.s3.amazonaws.com/logo.svg" type="image/svg+xml">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="resources/css/style.css">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
