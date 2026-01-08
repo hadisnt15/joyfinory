@@ -32,7 +32,30 @@
         </div>
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-        
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        } else {
+                            entry.target.classList.remove("show");
+                        }
+                    });
+                },
+                {
+                    threshold: 0.2 // 20% terlihat baru trigger
+                }
+            );
+
+            reveals.forEach(el => observer.observe(el));
+        });
+        </script>
+
+                
 
     </body>
 </html>
