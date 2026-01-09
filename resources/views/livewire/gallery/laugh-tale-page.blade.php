@@ -24,89 +24,98 @@
     <p class="p-4 reveal text-center">hahah aku cerita apasi, heheh intinya selamat ulang tahun kamu yaa. <span class="font-bold text-pink-500">Aku sayang kamuu Dinii.</span></p>
     
     <h3 class="p-6 text-center font-bold text-pink-500 text-3xl reveal">Our Laugh Tales</h3>
-    @php use Illuminate\Support\Str; @endphp
-    <div x-data="{ openModalId: null }" class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
+    @php
+    $laughtalesData = $laughtales->map(function($lt) {
+        return [
+            'id' => $lt->id,
+            'title' => $lt->title,
+            'date' => $lt->date,
+            'caption' => $lt->caption,
+        ];
+    });
+    @endphp
+
+    <div class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4" id="gallery">
+
         @foreach ($laughtales as $lt)
             <div
-                @click="openModalId = openModalId === {{ $lt->id }} ? null : {{ $lt->id }}"
                 class="reveal group gallery-card cursor-pointer mb-5 lg:mb-8 break-inside-avoid 
                     rounded-xl border-2 border-pink-500
                     bg-white/5 backdrop-blur 
                     shadow-lg transition-all duration-500"
+                data-id="{{ $lt->id }}"
             >
                 <div class="relative overflow-hidden rounded-lg">
 
-                    <!-- IMAGE -->
                     <img 
                         src="{{ asset('storage/'.$lt->photo) }}" 
                         alt="{{ $lt->title }}" 
-                        class="w-full scale-105 transition-all duration-700 ease-out
-                            group-hover:scale-110 group-hover:rotate-1 
-                            group-[.active]:scale-110 group-[.active]:rotate-1"
+                        class="w-full scale-105 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
                     >
 
-                    <!-- OVERLAY -->
                     <div 
-                        class="absolute inset-0 
-                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
-                            opacity-0
-                            transition-all duration-500
-                            flex flex-col justify-end p-4
-                            pointer-events-none
-                            group-hover:opacity-100
-                            group-[.active]:opacity-100"
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 transition-all duration-500 flex flex-col justify-end p-4 pointer-events-none group-hover:opacity-100"
                     >
-
-                        <!-- TITLE -->
-                        <p 
-                            class="text-white text-xs md:text-sm font-semibold
-                                translate-y-6 opacity-0
-                                transition-all duration-500
-                                group-hover:translate-y-0 group-hover:opacity-100
-                                group-[.active]:translate-y-0 group-[.active]:opacity-100"
-                        >
-                            {{ $lt->title }}
-                        </p>
-
-                        <!-- CAPTION (truncated) -->
-                        <p 
-                            class="text-gray-200 text-xs md:text-sm mt-1
-                                translate-y-6 opacity-0
-                                transition-all duration-700 delay-100
-                                group-hover:translate-y-0 group-hover:opacity-100
-                                group-[.active]:translate-y-0 group-[.active]:opacity-100"
-                        >
-                            {{ $lt->date }} | {{ Str::limit($lt->caption, 100) }}
-                        </p>
-
+                        <p class="text-white text-xs md:text-sm font-semibold translate-y-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">{{ $lt->title }}</p>
+                        <p class="text-gray-200 text-xs md:text-sm mt-1 translate-y-6 opacity-0 transition-all duration-700 delay-100 group-hover:translate-y-0 group-hover:opacity-100">{{ $lt->date }} | {{ \Illuminate\Support\Str::limit($lt->caption, 100) }}</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div
-                x-show="openModalId === {{ $lt->id }}"
-                x-transition
-                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-                style="display: none;"
-                @click.away="openModalId = null"
-            >
-                <div class="bg-white dark:bg-gray-800 rounded-lg max-w-lg mx-4 p-6 shadow-lg overflow-auto max-h-[80vh]">
-                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{{ $lt->title }}</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $lt->date }}</p>
-                    <p class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ $lt->caption }}</p>
-                    <button
-                        @click="openModalId = null"
-                        class="mt-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded"
-                    >
-                        Tutup
-                    </button>
                 </div>
             </div>
         @endforeach
     </div>
+    
+    <!-- Modal HTML -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-lg mx-4 p-6 shadow-lg overflow-auto max-h-[80vh]" id="modal-content">
+            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" id="modal-title"></h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4" id="modal-date"></p>
+            <p class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap" id="modal-caption"></p>
+            <button id="modal-close" class="mt-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded">Tutup</button>
+        </div>
+    </div>
+
 
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const laughtales = @json($laughtalesData);
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDate = document.getElementById('modal-date');
+        const modalCaption = document.getElementById('modal-caption');
+        const modalClose = document.getElementById('modal-close');
+
+        gallery.addEventListener('click', function(e) {
+            let card = e.target.closest('.gallery-card');
+            if (!card) return;
+
+            const id = card.getAttribute('data-id');
+            const item = laughtales.find(lt => lt.id == id);
+            if (!item) return;
+
+            modalTitle.textContent = item.title;
+            modalDate.textContent = item.date;
+            modalCaption.textContent = item.caption;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        modalClose.addEventListener('click', function() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) { // klik di luar konten modal
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        });
+    });
+</script>
 
 
 {{-- w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110 --}}
