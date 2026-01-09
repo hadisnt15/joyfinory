@@ -36,3 +36,14 @@
     60% { transform: scale(1.03); }
     100% { transform: scale(1); }
 }
+
+.caption {
+    max-height: 4.5em; /* batas default sekitar 3 baris */
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+    white-space: normal; /* agar teks bisa membungkus dengan benar */
+}
+
+.group.active .caption {
+    max-height: 400px; /* cukup tinggi supaya caption panjang bisa terlihat */
+}

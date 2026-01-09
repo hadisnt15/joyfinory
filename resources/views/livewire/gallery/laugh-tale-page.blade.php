@@ -51,7 +51,7 @@
                             {{ $lt->title }}
                         </h3>
 
-                        <!-- CAPTION (EXPANDABLE) -->
+                        <!-- CAPTION (expandable) -->
                         <p 
                             class="caption text-gray-200 text-sm mt-1
                                 translate-y-6 opacity-0
