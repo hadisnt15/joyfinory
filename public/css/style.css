@@ -1,49 +1,124 @@
+/* Container horizontal scroll */
+.gallery-container {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding: 1.5rem 0;
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar container */
+.gallery-container::-webkit-scrollbar {
+    height: 8px;
+}
+.gallery-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Card */
+.group {
+    flex: 0 0 auto;
+    width: 280px;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Active state */
+.group.active {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgb(0 0 0 / 0.3);
+}
+
+/* Image */
+.group img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+    transition: transform 0.5s ease-in-out;
+}
+
 .group.active img {
     transform: scale(1.10);
-    transition: transform 0.5s ease-in-out;
+}
+
+/* Overlay */
+.group > div.absolute {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    pointer-events: none;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .group.active div.absolute {
     opacity: 1;
-    transition: opacity 0.3s ease;
+    pointer-events: auto;
 }
 
-.group.active h3, .group.active p {
+/* Title & Caption inside overlay */
+.group.active h3, 
+.group.active p {
     transform: translateY(0);
     transition: transform 0.5s ease;
 }
-/* initial state */
+
+/* initial hidden state for title and caption */
+.group h3, 
+.group p {
+    transform: translateY(1.5rem);
+}
+
+/* Reveal animation */
 .reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* saat terlihat */
 .reveal.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-.heartbeat {
-    animation: heartbeat 2s infinite;
-}
-
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.03); }
-    40% { transform: scale(1); }
-    60% { transform: scale(1.03); }
-    100% { transform: scale(1); }
-}
-
+/* Caption */
 .caption {
-    max-height: 4.5em; /* batas default sekitar 3 baris */
+    max-height: 4.5em; /* default ~3 baris */
     overflow: hidden;
     transition: max-height 0.6s ease;
-    white-space: normal; /* agar teks bisa membungkus dengan benar */
+    white-space: normal;
+    color: #ddd;
+    font-size: 0.875rem;
+    margin: 0.5rem 1rem 1rem;
+    scrollbar-width: thin;
 }
 
+.caption::-webkit-scrollbar {
+    width: 6px;
+}
+.caption::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 3px;
+}
+
+/* Expanded caption on active */
 .group.active .caption {
-    max-height: 400px; /* cukup tinggi supaya caption panjang bisa terlihat */
+    max-height: 400px; /* cukup tinggi untuk baca caption panjang */
+    overflow-y: auto;
 }
