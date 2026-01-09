@@ -53,7 +53,7 @@
 
                         <!-- CAPTION -->
                         <p 
-                            class="text-gray-200 text-sm mt-1
+                            class="text-gray-200 text-xs mt-1
                                 translate-y-6 opacity-0
                                 transition-all duration-700 delay-100
                                 group-hover:translate-y-0 group-hover:opacity-100
