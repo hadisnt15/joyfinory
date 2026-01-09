@@ -22,100 +22,130 @@
     <p class="p-4 reveal text-center">Ibarat kita kalo di kapal, aku yang rasional jadi kaptennya kamu yang emosional jadi navigatornya hahah. Berlayar di lautan new world yang banyak badaina inih. Selama kita bareng teros, satu visi misi, satu tujuan, ibadah bareng, belajar bareng, grow bareng, selesein masalah bareng, sampe pada akhirna biar ada masalah selalu clear ada jalannya dan kita tetep terus saling sayang saling cinta, insyaAllah bahagia kisah kita till jannah, dan jadi lah Laugh Tale.</p>
     
     <p class="p-4 reveal text-center">hahah aku cerita apasi, heheh intinya selamat ulang tahun kamu yaa. <span class="font-bold text-pink-500">Aku sayang kamuu Dinii.</span></p>
-    
     <h3 class="p-6 text-center font-bold text-pink-500 text-3xl reveal">Our Laugh Tales</h3>
-    @php
-    $laughtalesData = $laughtales->map(function($lt) {
-        return [
-            'id' => $lt->id,
-            'title' => $lt->title,
-            'date' => $lt->date,
-            'caption' => $lt->caption,
-        ];
-    });
-    @endphp
-
-    <div class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4" id="gallery">
-
+    <div class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
         @foreach ($laughtales as $lt)
             <div
                 class="reveal group gallery-card cursor-pointer mb-5 lg:mb-8 break-inside-avoid 
-                    rounded-xl border-2 border-pink-500
+                    rounded-xl border border-white/10 
                     bg-white/5 backdrop-blur 
                     shadow-lg transition-all duration-500"
-                data-id="{{ $lt->id }}"
+                onclick="openCaptionModal('{{ addslashes($lt->title) }}', '{{ addslashes($lt->caption) }}', '{{ $lt->date }}', '{{ asset('storage/'.$lt->photo) }}')"
             >
+
                 <div class="relative overflow-hidden rounded-lg">
 
+                    <!-- IMAGE -->
                     <img 
                         src="{{ asset('storage/'.$lt->photo) }}" 
                         alt="{{ $lt->title }}" 
-                        class="w-full scale-105 transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
+                        class="w-full scale-105 transition-all duration-700 ease-out
+                            group-hover:scale-110 group-hover:rotate-1
+                            group-[.active]:scale-110 group-[.active]:rotate-1"
                     >
 
+                    <!-- OVERLAY -->
                     <div 
-                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent
-                            opacity-0 transition-all duration-500 flex flex-col justify-end p-4 pointer-events-none group-hover:opacity-100"
+                        class="absolute inset-0 
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0
+                            transition-all duration-500
+                            flex flex-col justify-end p-4
+                            pointer-events-none
+                            group-hover:opacity-100
+                            group-[.active]:opacity-100"
                     >
-                        <p class="text-white text-xs md:text-sm font-semibold translate-y-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">{{ $lt->title }}</p>
-                        <p class="text-gray-200 text-xs md:text-sm mt-1 translate-y-6 opacity-0 transition-all duration-700 delay-100 group-hover:translate-y-0 group-hover:opacity-100">{{ $lt->date }} | {{ \Illuminate\Support\Str::limit($lt->caption, 100) }}</p>
+
+                        <!-- TITLE -->
+                        <p 
+                            class="text-white text-xs md:text-sm font-semibold
+                                translate-y-6 opacity-0
+                                transition-all duration-500
+                                group-hover:translate-y-0 group-hover:opacity-100
+                                group-[.active]:translate-y-0 group-[.active]:opacity-100"
+                        >
+                            {{ $lt->title }}
+                        </p>
+
+                        <!-- CAPTION (maks 70 karakter) -->
+                        <p 
+                            class="text-gray-200 text-xs md:text-sm mt-1
+                                translate-y-6 opacity-0
+                                transition-all duration-700 delay-100
+                                group-hover:translate-y-0 group-hover:opacity-100
+                                group-[.active]:translate-y-0 group-[.active]:opacity-100"
+                        >
+                            {{ Str::limit($lt->date . ' | ' . $lt->caption, 70) }}
+                        </p>
+
                     </div>
                 </div>
             </div>
         @endforeach
-    </div>
-    
-    <!-- Modal HTML -->
-    <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
-        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-lg mx-4 p-6 shadow-lg overflow-auto max-h-[80vh]" id="modal-content">
-            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" id="modal-title"></h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4" id="modal-date"></p>
-            <p class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap" id="modal-caption"></p>
-            <button id="modal-close" class="mt-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded">Tutup</button>
+    </div>  
+
+    <!-- Modal for full caption -->
+    <div id="captionModal" 
+        class="fixed inset-0 flex items-center justify-center 
+            opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-50">
+        <div class="bg-white rounded-lg max-w-lg w-full p-6 relative
+                    transform transition-transform duration-300 ease-in-out scale-95">
+            <button onclick="closeCaptionModal()" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold">&times;</button>
+            <img id="modalImage" src="" alt="" class="w-full mb-4 rounded">
+            <h3 id="modalTitle" class="text-lg font-semibold mb-2"></h3>
+            <p id="modalDate" class="text-sm text-gray-500 mb-4"></p>
+            <p id="modalCaption" class="text-gray-700 whitespace-pre-wrap"></p>
         </div>
     </div>
 
 
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const laughtales = @json($laughtalesData);
-        const gallery = document.getElementById('gallery');
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDate = document.getElementById('modal-date');
-        const modalCaption = document.getElementById('modal-caption');
-        const modalClose = document.getElementById('modal-close');
+    const modal = document.getElementById('captionModal');
+    const modalContent = modal.querySelector('div');
 
-        gallery.addEventListener('click', function(e) {
-            let card = e.target.closest('.gallery-card');
-            if (!card) return;
+    function openCaptionModal(title, caption, date, imgSrc) {
+        // Isi konten modal
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalCaption').textContent = caption;
+        document.getElementById('modalDate').textContent = date;
+        document.getElementById('modalImage').src = imgSrc;
+        document.getElementById('modalImage').alt = title;
 
-            const id = card.getAttribute('data-id');
-            const item = laughtales.find(lt => lt.id == id);
-            if (!item) return;
+        // Tampilkan modal dengan animasi fade dan scale
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100');
 
-            modalTitle.textContent = item.title;
-            modalDate.textContent = item.date;
-            modalCaption.textContent = item.caption;
+        // sedikit delay supaya transition scale berjalan
+        setTimeout(() => {
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }, 10);
+    }
 
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        });
+    function closeCaptionModal() {
+        // Animasi scale kecil dulu
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
 
-        modalClose.addEventListener('click', function() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
+        // Setelah animasi scale selesai, sembunyikan modal
+        setTimeout(() => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+        }, 300); // durasi harus sama dengan duration-300 di tailwind
+    }
 
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) { // klik di luar konten modal
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        });
+    // Tutup modal saat klik di luar konten
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeCaptionModal();
+        }
+    });
+
+    // Tutup modal dengan tombol Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape" && !modal.classList.contains('pointer-events-none')) {
+            closeCaptionModal();
+        }
     });
 </script>
-
-
-{{-- w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110 --}}
