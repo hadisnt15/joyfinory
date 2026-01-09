@@ -1,38 +1,38 @@
-.gallery-container {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 1rem;
+.group.active img {
+    transform: scale(1.10);
+    transition: transform 0.5s ease-in-out;
 }
 
-.gallery-grid {
-    grid-auto-columns: 250px; /* lebar tiap kolom */
-    grid-auto-flow: column; /* isi grid berdasarkan kolom */
+.group.active div.absolute {
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-/* Scrollbar minimalis */
-.gallery-container::-webkit-scrollbar {
-    height: 8px;
+.group.active h3, .group.active p {
+    transform: translateY(0);
+    transition: transform 0.5s ease;
 }
-.gallery-container::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-}
-
-/* Responsive grid-template-rows with media queries */
-@media (min-width: 1024px) {
-    .gallery-grid {
-        grid-template-rows: repeat(4, minmax(100px, max-content));
-    }
+/* initial state */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-    .gallery-grid {
-        grid-template-rows: repeat(3, minmax(100px, max-content));
-    }
+/* saat terlihat */
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@media (max-width: 767px) {
-    .gallery-grid {
-        grid-template-rows: repeat(2, minmax(100px, max-content));
-    }
+.heartbeat {
+    animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.03); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
