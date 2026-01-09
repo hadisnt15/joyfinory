@@ -32,45 +32,28 @@
         </div>
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-        <!-- Tambahkan CDN Masonry & imagesLoaded -->
-        {{-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const grid = document.querySelector('#gallery-grid');
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
 
-                // Inisialisasi Masonry
-                const msnry = new Masonry(grid, {
-                    itemSelector: '.gallery-card',
-                    columnWidth: '.gallery-card',
-                    gutter: 20,
-                    fitWidth: true,
-                    horizontalOrder: true
-                });
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        } else {
+                            entry.target.classList.remove("show");
+                        }
+                    });
+                },
+                {
+                    threshold: 0.2 // 20% terlihat baru trigger
+                }
+            );
 
-                // Pastikan Masonry layout refresh setelah semua gambar loaded
-                imagesLoaded(grid).on('progress', () => {
-                    msnry.layout();
-                });
-
-                // Intersection Observer untuk efek reveal
-                const reveals = document.querySelectorAll(".reveal");
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add("show");
-                            } else {
-                                entry.target.classList.remove("show");
-                            }
-                        });
-                    },
-                    { threshold: 0.2 }
-                );
-                reveals.forEach(el => observer.observe(el));
-            });
-        </script> --}}
+            reveals.forEach(el => observer.observe(el));
+        });
+        </script>
 
                 
 
