@@ -1,32 +1,3 @@
-/* Ganti container jadi grid */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem; /* sama dengan gap-5 */
-}
-
-@media (min-width: 768px) {
-    /* md dan ke atas */
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    /* lg dan ke atas */
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1280px) {
-    /* xl dan ke atas */
-    .gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Pertahankan styling aktif dan animasi */
 .group.active img {
     transform: scale(1.10);
     transition: transform 0.5s ease-in-out;
@@ -41,7 +12,6 @@
     transform: translateY(0);
     transition: transform 0.5s ease;
 }
-
 /* initial state */
 .reveal {
     opacity: 0;
