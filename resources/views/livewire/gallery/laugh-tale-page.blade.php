@@ -25,21 +25,10 @@
     
     <h3 class="p-6 text-center font-bold text-pink-500 text-3xl reveal">Our Laugh Tales</h3>
     @php use Illuminate\Support\Str; @endphp
-
-    <div x-data="{
-            openModalId: null,
-            selectedItem: null,
-            laughtales: @json($laughtales->map(fn($lt) => [
-                'id' => $lt->id,
-                'title' => $lt->title,
-                'date' => $lt->date,
-                'caption' => $lt->caption,
-            ]))
-        }" class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
-
+    <div x-data="{ openModalId: null }" class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
         @foreach ($laughtales as $lt)
             <div
-                @click="openModalId = {{ $lt->id }}; selectedItem = laughtales.find(i => i.id === {{ $lt->id }})"
+                @click="openModalId = openModalId === {{ $lt->id }} ? null : {{ $lt->id }}"
                 class="reveal group gallery-card cursor-pointer mb-5 lg:mb-8 break-inside-avoid 
                     rounded-xl border-2 border-pink-500
                     bg-white/5 backdrop-blur 
@@ -93,30 +82,29 @@
                     </div>
                 </div>
             </div>
-        @endforeach
 
-        <!-- Modal tunggal -->
-        <div
-            x-show="openModalId !== null"
-            x-transition
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-            style="display: none;"
-            @click.away="openModalId = null"
-        >
-            <div class="bg-white dark:bg-gray-800 rounded-lg max-w-lg mx-4 p-6 shadow-lg overflow-auto max-h-[80vh]" @click.stop>
-                <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" x-text="selectedItem?.title"></h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4" x-text="selectedItem?.date"></p>
-                <p class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap" x-text="selectedItem?.caption"></p>
-                <button
-                    @click="openModalId = null"
-                    class="mt-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded"
-                >
-                    Tutup
-                </button>
+            <!-- Modal -->
+            <div
+                x-show="openModalId === {{ $lt->id }}"
+                x-transition
+                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                style="display: none;"
+                @click.away="openModalId = null"
+            >
+                <div class="bg-white dark:bg-gray-800 rounded-lg max-w-lg mx-4 p-6 shadow-lg overflow-auto max-h-[80vh]">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{{ $lt->title }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $lt->date }}</p>
+                    <p class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ $lt->caption }}</p>
+                    <button
+                        @click="openModalId = null"
+                        class="mt-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded"
+                    >
+                        Tutup
+                    </button>
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
-
 
 </div>
 
