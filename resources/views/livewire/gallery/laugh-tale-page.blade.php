@@ -6,18 +6,20 @@
     <div class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
         @foreach ($laughtales as $lt)
             <div
-                class="reveal group cursor-pointer mb-5 lg:mb-8 break-inside-avoid 
+                class="reveal group gallery-card cursor-pointer mb-5 lg:mb-8 break-inside-avoid 
                     rounded-xl border border-white/10 
                     bg-white/5 backdrop-blur 
-                    shadow-lg hover:shadow-pink-500/30 
-                    transition-all duration-500"
+                    shadow-lg transition-all duration-500"
                 onclick="
-                    document.querySelectorAll('.group.active')
+                    document.querySelectorAll('.gallery-card.active')
                         .forEach(el => el !== this && el.classList.remove('active'));
                     this.classList.toggle('active');
                 "
             >
+
                 <div class="relative overflow-hidden rounded-lg">
+
+                    <!-- IMAGE -->
                     <img 
                         src="{{ asset('storage/'.$lt->photo) }}" 
                         alt="{{ $lt->title }}" 
@@ -26,29 +28,40 @@
                             group-[.active]:scale-110 group-[.active]:rotate-1"
                     >
 
-                    <div class="absolute inset-0 
-                                bg-gradient-to-t from-black/80 via-black/40 to-transparent
-                                opacity-0 
-                                transition-all duration-500 
-                                flex flex-col justify-end p-4
-                                group-hover:opacity-100
-                                group-[.active]:opacity-100">
+                    <!-- OVERLAY -->
+                    <div 
+                        class="absolute inset-0 
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0
+                            transition-all duration-500
+                            flex flex-col justify-end p-4
+                            pointer-events-none
+                            group-hover:opacity-100
+                            group-[.active]:opacity-100"
+                    >
 
-                        <h3 class="text-white text-xl font-bold
+                        <!-- TITLE -->
+                        <h3 
+                            class="text-white text-xl font-bold
                                 translate-y-6 opacity-0
                                 transition-all duration-500
                                 group-hover:translate-y-0 group-hover:opacity-100
-                                group-[.active]:translate-y-0 group-[.active]:opacity-100">
+                                group-[.active]:translate-y-0 group-[.active]:opacity-100"
+                        >
                             {{ $lt->title }}
                         </h3>
 
-                        <p class="text-gray-200 text-sm mt-1
+                        <!-- CAPTION -->
+                        <p 
+                            class="text-gray-200 text-sm mt-1
                                 translate-y-6 opacity-0
                                 transition-all duration-700 delay-100
                                 group-hover:translate-y-0 group-hover:opacity-100
-                                group-[.active]:translate-y-0 group-[.active]:opacity-100">
+                                group-[.active]:translate-y-0 group-[.active]:opacity-100"
+                        >
                             {{ $lt->caption }}
                         </p>
+
                     </div>
                 </div>
             </div>
