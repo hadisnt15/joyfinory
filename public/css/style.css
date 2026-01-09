@@ -1,25 +1,34 @@
-/* Container Gallery Grid (disesuaikan oleh Masonry, tapi bisa kasih min-width agar responsif) */
-#gallery-grid {
-    max-width: 100%;
-}
+/* Container masonry grid tidak perlu style khusus */
 
-/* Styling gallery-card tetap sama */
+/* Styling gallery-card: atur width tetap agar Masonry bisa hitung dengan benar */
 .gallery-card {
-    /* Jika perlu untuk mencegah break col */
     break-inside: avoid;
+    width: 250px; /* bisa disesuaikan lebar gambar yang diinginkan */
+    margin-bottom: 20px; /* supaya jarak bawah tetap ada */
 }
 
-/* Efek aktif pada gambar */
-.group.active img {
-    transform: scale(1.10);
-    transition: transform 0.5s ease-in-out;
+/* Styling gambar agar rapi dan efek transisi */
+.gallery-card img.gallery-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem; /* agar sesuai rounded-lg */
+    transition: transform 0.7s ease-out;
 }
 
+/* Hover dan active effect hanya saat hover/active, supaya tidak mengganggu layout */
+.gallery-card:hover img.gallery-image,
+.gallery-card.group.active img.gallery-image {
+    transform: scale(1.1) rotate(1deg);
+}
+
+/* Efek aktif pada overlay */
 .group.active div.absolute {
     opacity: 1;
     transition: opacity 0.3s ease;
 }
 
+/* Efek aktif pada teks */
 .group.active h3, .group.active p {
     transform: translateY(0);
     transition: transform 0.5s ease;

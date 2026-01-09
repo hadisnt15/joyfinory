@@ -33,7 +33,7 @@
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
         <!-- Tambahkan CDN Masonry & imagesLoaded -->
-        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        {{-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
         <script>
@@ -70,7 +70,7 @@
                 );
                 reveals.forEach(el => observer.observe(el));
             });
-        </script>
+        </script> --}}
 
                 
 

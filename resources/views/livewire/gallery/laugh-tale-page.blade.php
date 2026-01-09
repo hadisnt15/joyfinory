@@ -22,9 +22,7 @@
                     <img 
                         src="{{ asset('storage/'.$lt->photo) }}" 
                         alt="{{ $lt->title }}" 
-                        class="w-full scale-105 transition-all duration-700 ease-out
-                            group-hover:scale-110 group-hover:rotate-1
-                            group-[.active]:scale-110 group-[.active]:rotate-1"
+                        class="gallery-image w-full"
                     >
 
                     <!-- OVERLAY -->
@@ -67,6 +65,47 @@
         @endforeach
     </div>
 </div>
+
+<!-- CDN Masonry dan imagesLoaded -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const grid = document.querySelector('#gallery-grid');
+
+        // Inisialisasi Masonry
+        const msnry = new Masonry(grid, {
+            itemSelector: '.gallery-card',
+            columnWidth: '.gallery-card',
+            gutter: 20,
+            fitWidth: true,
+            horizontalOrder: true,
+            percentPosition: true,
+        });
+
+        // Refresh layout setiap gambar selesai load
+        imagesLoaded(grid).on('progress', () => {
+            msnry.layout();
+        });
+
+        // Intersection Observer untuk efek reveal
+        const reveals = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    } else {
+                        entry.target.classList.remove("show");
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+        reveals.forEach(el => observer.observe(el));
+    });
+</script>
 
 
 {{-- w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110 --}}
