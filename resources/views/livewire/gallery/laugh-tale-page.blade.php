@@ -42,7 +42,7 @@
 
                         <!-- TITLE -->
                         <h3 
-                            class="text-white text-xl font-bold
+                            class="text-white text-xs md:text-sm font-semibold
                                 translate-y-6 opacity-0
                                 transition-all duration-500
                                 group-hover:translate-y-0 group-hover:opacity-100
@@ -59,7 +59,7 @@
                                 group-hover:translate-y-0 group-hover:opacity-100
                                 group-[.active]:translate-y-0 group-[.active]:opacity-100"
                         >
-                            {{ $lt->caption }}
+                            {{ $lt->date }} | {{ $lt->caption }}
                         </p>
 
                     </div>
