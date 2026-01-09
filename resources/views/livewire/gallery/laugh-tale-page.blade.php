@@ -51,9 +51,9 @@
                             {{ $lt->title }}
                         </h3>
 
-                        <!-- CAPTION -->
+                        <!-- CAPTION (EXPANDABLE) -->
                         <p 
-                            class="text-gray-200 text-sm mt-1
+                            class="caption text-gray-200 text-sm mt-1
                                 translate-y-6 opacity-0
                                 transition-all duration-700 delay-100
                                 group-hover:translate-y-0 group-hover:opacity-100
@@ -62,9 +62,17 @@
                             {{ $lt->caption }}
                         </p>
 
+                        <!-- HINT -->
+                        <span class="text-pink-400 text-xs mt-2 italic block
+                                    opacity-0 transition-opacity duration-300
+                                    group-[.active]:opacity-100">
+                            tap lagi untuk menutup 💗
+                        </span>
+
                     </div>
                 </div>
             </div>
+
 
 
         @endforeach
