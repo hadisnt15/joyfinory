@@ -33,45 +33,27 @@
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const grid = document.querySelector('#gallery');
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
 
-                // Intersection Observer untuk efek reveal
-                const reveals = document.querySelectorAll(".reveal");
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add("show");
-                            } else {
-                                entry.target.classList.remove("show");
-                            }
-                        });
-                    },
-                    { threshold: 0.2 }
-                );
-                reveals.forEach(el => observer.observe(el));
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        } else {
+                            entry.target.classList.remove("show");
+                        }
+                    });
+                },
+                {
+                    threshold: 0.2 // 20% terlihat baru trigger
+                }
+            );
 
-                // Inisialisasi Masonry setelah gambar selesai dimuat
-                const msnry = new Masonry(grid, {
-                    itemSelector: '.gallery-card',
-                    columnWidth: '.gallery-card',
-                    gutter: 20,
-                    fitWidth: true,
-                    percentPosition: true
-                });
-
-                // Reload layout saat semua gambar selesai dimuat
-                const imgLoad = imagesLoaded(grid);
-                imgLoad.on('progress', () => {
-                    msnry.layout();
-                });
-            });
+            reveals.forEach(el => observer.observe(el));
+        });
         </script>
-
-        <!-- Jangan lupa tambahkan imagesLoaded.js -->
-        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
 
                 
 
