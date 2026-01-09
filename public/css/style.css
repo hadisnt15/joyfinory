@@ -1,38 +1,38 @@
 .gallery-container {
-    /* Enable horizontal scroll with smooth scrolling */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 1rem; /* agar scrollbar tidak overlap */
+    padding-bottom: 1rem;
 }
 
-/* Atur tinggi container sesuai gambar maksimal */
 .gallery-grid {
-    /* flex container untuk mengalir horizontal */
-    display: flex;
-    flex-wrap: nowrap; /* jangan wrap, supaya horizontal scroll */
-    gap: 1.25rem; /* gap-5 */
+    grid-auto-columns: 250px; /* lebar tiap kolom */
+    grid-auto-flow: column; /* isi grid berdasarkan kolom */
 }
 
-/* Card ukuran fixed supaya berjajar rapih */
-.gallery-card {
-    width: 250px; /* bisa disesuaikan */
-    flex-shrink: 0; /* jangan mengecil */
-}
-
-/* Masonry effect: biar beda tinggi */
-.gallery-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 0.5rem;
-}
-
-/* Optional: buat scrollbar minimalis */
+/* Scrollbar minimalis */
 .gallery-container::-webkit-scrollbar {
     height: 8px;
 }
-
 .gallery-container::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
+}
+
+/* Responsive grid-template-rows with media queries */
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-rows: repeat(4, minmax(100px, max-content));
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .gallery-grid {
+        grid-template-rows: repeat(3, minmax(100px, max-content));
+    }
+}
+
+@media (max-width: 767px) {
+    .gallery-grid {
+        grid-template-rows: repeat(2, minmax(100px, max-content));
+    }
 }

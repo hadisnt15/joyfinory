@@ -4,19 +4,25 @@
     <p class="p-4 reveal heartbeat text-center">Huwwaa kangennn karna LDR, tapi bismillah semoga fase ini emang jalan yang terbaik buat kita. Kita dipisah sama jarak dolo, fokus masing-masing, ngembangin diri dan belajar whahah keren banget kita dah sama-sama banyak berkembang dari waktu pertama dekat dulu iyy.</p>
     <p class="p-4 reveal heartbeat text-center">Aku bangga banget sama kamuu, gak nyangka aku kamu ngide mau usaha tuu. Makasih sayang kamu dah merintisin usaha dan bisnis buat masa depan kita bareng. Bismillah sesudah halal nante kita sama-sama bisa kembangin usaha dan bisnisnya bareng, dan dari ide pinterr kamu buat usaha dan bisnis lahir jua ide dari aku buat kembangin aplikasi manajemen bisnisnya, yang diselipi unsur bucin hahah. Semoga kamu suka dan bermanfaat aplikasinya :).</p>
     <div class="gallery-container overflow-x-auto">
-        <div class="gallery-grid grid grid-flow-col auto-cols-[250px] gap-5" style="grid-template-rows: repeat(4, minmax(100px, max-content));">
+        <div
+            class="gallery-grid grid gap-5"
+            style="
+                grid-auto-flow: column;
+                grid-template-rows: repeat(2, minmax(100px, max-content)); /* default 2 baris */
+            "
+            x-bind:style="window.innerWidth >= 1024 ? 'grid-template-rows: repeat(4, minmax(100px, max-content));' : (window.innerWidth >= 768 ? 'grid-template-rows: repeat(3, minmax(100px, max-content));' : 'grid-template-rows: repeat(2, minmax(100px, max-content));')"
+        >
             @foreach ($laughtales as $lt)
                 <div
                     class="gallery-card reveal group cursor-pointer rounded-xl border border-white/10 bg-white/5 backdrop-blur shadow-lg transition-all duration-500"
+                    style="width: 250px;"
                     onclick="
                         document.querySelectorAll('.gallery-card.active')
                             .forEach(el => el !== this && el.classList.remove('active'));
                         this.classList.toggle('active');
                     "
                 >
-
                     <div class="relative overflow-hidden rounded-lg">
-
                         <!-- IMAGE -->
                         <img 
                             src="{{ asset('storage/'.$lt->photo) }}" 
@@ -25,7 +31,6 @@
                                 group-hover:scale-110 group-hover:rotate-1
                                 group-[.active]:scale-110 group-[.active]:rotate-1"
                         >
-
                         <!-- OVERLAY -->
                         <div 
                             class="absolute inset-0 
@@ -37,7 +42,6 @@
                                 group-hover:opacity-100
                                 group-[.active]:opacity-100"
                         >
-
                             <!-- TITLE -->
                             <p 
                                 class="text-white text-xs md:text-sm font-semibold
@@ -48,7 +52,6 @@
                             >
                                 {{ $lt->title }}
                             </p>
-
                             <!-- CAPTION -->
                             <p 
                                 class="text-gray-200 text-xs md:text-sm mt-1
@@ -59,14 +62,12 @@
                             >
                                 {{ $lt->date }} | {{ $lt->caption }}
                             </p>
-
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-
 
 </div>
 
