@@ -32,10 +32,30 @@
         </div>
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+        <!-- Tambahkan CDN Masonry & imagesLoaded -->
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const reveals = document.querySelectorAll(".reveal");
+                const grid = document.querySelector('#gallery-grid');
 
+                // Inisialisasi Masonry
+                const msnry = new Masonry(grid, {
+                    itemSelector: '.gallery-card',
+                    columnWidth: '.gallery-card',
+                    gutter: 20,
+                    fitWidth: true,
+                    horizontalOrder: true
+                });
+
+                // Pastikan Masonry layout refresh setelah semua gambar loaded
+                imagesLoaded(grid).on('progress', () => {
+                    msnry.layout();
+                });
+
+                // Intersection Observer untuk efek reveal
+                const reveals = document.querySelectorAll(".reveal");
                 const observer = new IntersectionObserver(
                     (entries) => {
                         entries.forEach(entry => {
@@ -48,33 +68,9 @@
                     },
                     { threshold: 0.2 }
                 );
-
                 reveals.forEach(el => observer.observe(el));
-
-                // MASONRY GRID LOGIC
-                const galleryGrid = document.querySelector('.gallery-grid');
-                const rowHeight = parseInt(window.getComputedStyle(galleryGrid).getPropertyValue('grid-auto-rows'));
-                const rowGap = parseInt(window.getComputedStyle(galleryGrid).getPropertyValue('gap'));
-
-                function resizeAllGridItems() {
-                    const allItems = document.querySelectorAll('.gallery-grid > div');
-                    allItems.forEach(item => {
-                        const content = item.querySelector('img');
-                        if (!content) return;
-                        // tinggi total termasuk margin bottom
-                        const itemHeight = content.getBoundingClientRect().height;
-                        // hitung span
-                        const rowSpan = Math.ceil((itemHeight + rowGap) / (rowHeight + rowGap));
-                        item.style.gridRowEnd = "span " + rowSpan;
-                    });
-                }
-
-                window.addEventListener('resize', resizeAllGridItems);
-                // Jalankan sekali saat load
-                resizeAllGridItems();
             });
-            </script>
-
+        </script>
 
                 
 
