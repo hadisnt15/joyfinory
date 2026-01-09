@@ -117,7 +117,7 @@
                                             <th scope="row" class="px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white py-3">
                                                 {{ $f->date }} <br>
                                                 <span class="font-semibold">{{ $f->title }}</span> <br>
-                                                <span class="text-xs text-gray-300">{{ $f->caption }}</span>
+                                                <span class="text-xs text-gray-300 block max-w-xs md:max-w-sm lg:max-w-md truncate-3-lines break-words whitespace-normal">{{ $f->caption }}</span>
                                             </th>
                                             <th scope="row" class="px-3 font-medium text-gray-900 whitespace-nowrap dark:text-white py-3">
                                                 <img src="{{ !empty($f->photo) ? asset('storage/'.$f->photo) : asset('img/love.jpg') }}" alt="" class="size-12 flex-none rounded-md bg-gray-800 outline -outline-offset-1 outline-white/10" />
