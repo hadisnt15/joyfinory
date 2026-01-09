@@ -1,3 +1,36 @@
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: masonry; /* belum support luas, jadi kita gunakan fixed row height */
+    grid-auto-flow: dense;
+    gap: 1.25rem; /* gap 5 = 20px */
+}
+
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* untuk efek masonry dengan tinggi variatif */
+.gallery-grid > div {
+    break-inside: avoid; /* agar elemen tidak terpecah */
+}
+
+/* gunakan fixed row height + span untuk masonry workaround */
+
+.gallery-card {
+    /* row height standar, misal 10rem (160px) */
+    grid-row-end: span 10; /* default, nanti diset dinamis di js */
+}
+
+/* styling sudah kamu punya, tinggal tambah ini agar tetap jalan */
 .group.active img {
     transform: scale(1.10);
     transition: transform 0.5s ease-in-out;
@@ -12,14 +45,13 @@
     transform: translateY(0);
     transition: transform 0.5s ease;
 }
-/* initial state */
+
 .reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* saat terlihat */
 .reveal.show {
     opacity: 1;
     transform: translateY(0);

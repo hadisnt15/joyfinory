@@ -33,27 +33,48 @@
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
         <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const reveals = document.querySelectorAll(".reveal");
+            document.addEventListener("DOMContentLoaded", () => {
+                const reveals = document.querySelectorAll(".reveal");
 
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("show");
-                        } else {
-                            entry.target.classList.remove("show");
-                        }
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("show");
+                            } else {
+                                entry.target.classList.remove("show");
+                            }
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+
+                reveals.forEach(el => observer.observe(el));
+
+                // MASONRY GRID LOGIC
+                const galleryGrid = document.querySelector('.gallery-grid');
+                const rowHeight = parseInt(window.getComputedStyle(galleryGrid).getPropertyValue('grid-auto-rows'));
+                const rowGap = parseInt(window.getComputedStyle(galleryGrid).getPropertyValue('gap'));
+
+                function resizeAllGridItems() {
+                    const allItems = document.querySelectorAll('.gallery-grid > div');
+                    allItems.forEach(item => {
+                        const content = item.querySelector('img');
+                        if (!content) return;
+                        // tinggi total termasuk margin bottom
+                        const itemHeight = content.getBoundingClientRect().height;
+                        // hitung span
+                        const rowSpan = Math.ceil((itemHeight + rowGap) / (rowHeight + rowGap));
+                        item.style.gridRowEnd = "span " + rowSpan;
                     });
-                },
-                {
-                    threshold: 0.2 // 20% terlihat baru trigger
                 }
-            );
 
-            reveals.forEach(el => observer.observe(el));
-        });
-        </script>
+                window.addEventListener('resize', resizeAllGridItems);
+                // Jalankan sekali saat load
+                resizeAllGridItems();
+            });
+            </script>
+
 
                 
 
