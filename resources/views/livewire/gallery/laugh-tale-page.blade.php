@@ -23,6 +23,7 @@
     
     <p class="p-4 reveal text-center">hahah aku cerita apasi, heheh intinya selamat ulang tahun kamu yaa. <span class="font-bold text-pink-500">Aku sayang kamuu Dinii.</span></p>
     
+    <h3 class="p-6 text-center font-bold text-pink-500 text-3xl reveal">Our Laugh Tales</h3>
     @php use Illuminate\Support\Str; @endphp
 
     <div x-data="{ openModalId: null }" class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
@@ -30,7 +31,7 @@
             <div
                 @click="openModalId = openModalId === {{ $lt->id }} ? null : {{ $lt->id }}"
                 class="reveal group gallery-card cursor-pointer mb-5 lg:mb-8 break-inside-avoid 
-                    rounded-xl border border-white/10 
+                    rounded-xl border-2 border-pink-500
                     bg-white/5 backdrop-blur 
                     shadow-lg transition-all duration-500"
             >
@@ -41,7 +42,7 @@
                         src="{{ asset('storage/'.$lt->photo) }}" 
                         alt="{{ $lt->title }}" 
                         class="w-full scale-105 transition-all duration-700 ease-out
-                            group-hover:scale-110 group-hover:rotate-1
+                            group-hover:scale-110 group-hover:rotate-1 
                             group-[.active]:scale-110 group-[.active]:rotate-1"
                     >
 
