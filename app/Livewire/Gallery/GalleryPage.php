@@ -87,7 +87,7 @@ class GalleryPage extends Component
     public function render()
     {
         return view('livewire.gallery.gallery-page', [
-            'galleries' => Gallery::orderBy('date','desc')->orderBy('id','desc')->paginate(10)
+            'galleries' => Gallery::orderBy('id','desc')->paginate(10)
         ])
         ->layout('components.layouts.app', [
             'title' => 'JoyFinory - Daftar Galeri'
