@@ -66,7 +66,7 @@
     </div>
     
     <!-- Modal HTML -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
         <div class="bg-white dark:bg-gray-800 rounded-lg max-w-lg mx-4 p-6 shadow-lg overflow-auto max-h-[80vh]" id="modal-content">
             <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" id="modal-title"></h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4" id="modal-date"></p>
