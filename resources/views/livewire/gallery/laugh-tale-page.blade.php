@@ -4,11 +4,10 @@
     <p class="p-4 reveal heartbeat text-center">Huwwaa kangennn karna LDR, tapi bismillah semoga fase ini emang jalan yang terbaik buat kita. Kita dipisah sama jarak dolo, fokus masing-masing, ngembangin diri dan belajar whahah keren banget kita dah sama-sama banyak berkembang dari waktu pertama dekat dulu iyy.</p>
     <p class="p-4 reveal heartbeat text-center">Aku bangga banget sama kamuu, gak nyangka aku kamu ngide mau usaha tuu. Makasih sayang kamu dah merintisin usaha dan bisnis buat masa depan kita bareng. Bismillah sesudah halal nante kita sama-sama bisa kembangin usaha dan bisnisnya bareng, dan dari ide pinterr kamu buat usaha dan bisnis lahir jua ide dari aku buat kembangin aplikasi manajemen bisnisnya, yang diselipi unsur bucin hahah. Semoga kamu suka dan bermanfaat aplikasinya :).</p>
     <div class="gallery-container overflow-x-auto">
-        <div class="gallery-grid flex gap-5">
+        <div class="gallery-grid grid grid-flow-col auto-cols-[250px] gap-5" style="grid-template-rows: repeat(4, minmax(100px, max-content));">
             @foreach ($laughtales as $lt)
                 <div
-                    class="gallery-card reveal group cursor-pointer rounded-xl border border-white/10 bg-white/5 backdrop-blur shadow-lg transition-all duration-500 flex-shrink-0"
-                    style="width: 250px;"
+                    class="gallery-card reveal group cursor-pointer rounded-xl border border-white/10 bg-white/5 backdrop-blur shadow-lg transition-all duration-500"
                     onclick="
                         document.querySelectorAll('.gallery-card.active')
                             .forEach(el => el !== this && el.classList.remove('active'));
@@ -67,6 +66,7 @@
             @endforeach
         </div>
     </div>
+
 
 </div>
 
