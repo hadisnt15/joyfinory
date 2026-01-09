@@ -1,5 +1,5 @@
 <div class="p-4 mx-auto max-w-7xl md:p-10">
-    <h3 class="p-4 reveal text-center font-bold text-pink-500 text-md">Developed and presented for my beloved, preciouss, gorgeouss, kyotteouss, pwincess and wifee, Dini Nadia Sahdiah.</h3>
+    <h3 class="p-4 reveal text-center font-bold text-pink-500 text-md">Developed and presented for my beloved, preciouss, gorgeouss, kyotteouss, pwincess and wifee. <br>Dini Nadia Sahdiah.</h3>
     
     <p class="p-4 reveal text-center">Selamat ulang tahun yang ke-25 Dinii, hwaa iyyy, semoga panjang umur, sehat terus, lancar rezeki, kabul segala hajat cita2 buat kamu, dan kita sekeluarga. Iyy udah satu tahun kita LDR, banyak susah senangnya apalagi kangennya hahahh, bismillah ke depannya lancar terus jalan kita menuju halal yaa, dan ke depannya kita bisa hidup sama-sama teruss sebagai cami dan ici :3. Walopun emang not that eziehh tapi bismillah insyaAllah kita punya visi misi yang samaa nikah buat ibadah, dan dalam menjalaninya pakek mindset buat "grow bareng till jannah" iyy, dan emang perlu persiapan matang uga buat mencapainyaa. Semoga di fase LDR ini kita sama-sama makin matang dan makin siap di segala aspek di diri kita masing-masing buat menuju pernikahan, aamiin.</p>
    
@@ -21,7 +21,7 @@
     
     <p class="p-4 reveal text-center">Ibarat kita kalo di kapal, aku yang rasional jadi kaptennya kamu yang emosional jadi navigatornya hahah. Berlayar di lautan new world yang banyak badaina inih. Selama kita bareng teros, satu visi misi, satu tujuan, ibadah bareng, belajar bareng, grow bareng, selesein masalah bareng, sampe pada akhirna biar ada masalah selalu clear ada jalannya dan kita tetep terus saling sayang saling cinta, insyaAllah bahagia kisah kita till jannah, dan jadi lah Laugh Tale.</p>
     
-    <p class="p-4 reveal text-center">hahah aku cerita apasi, heheh intinya selamat ulang tahun kamu yaa. <span class="font-bold text-pink-500">Aku sayang kamuu Dinii.</span></p>
+    <p class="p-4 reveal text-center">hahah aku cerita apasi, heheh intinya selamat ulang tahun kamu yaa. <br><span class="font-bold text-pink-500">Aku sayang kamuu Dinii.</span></p>
     <h3 class="p-6 text-center font-bold text-pink-500 text-3xl reveal">Our Laugh Tales</h3>
     <div class="columns-2 gap-5 md:columns-3 lg:columns-3 xl:columns-4">
         @foreach ($laughtales as $lt)
