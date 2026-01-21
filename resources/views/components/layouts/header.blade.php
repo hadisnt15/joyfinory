@@ -291,9 +291,11 @@
     </div>
   </nav>
   @auth
+    @if (auth()->user()->username === 'dininadia')
     <div class="flex flex-wrap items-center text-xs px-2 font-medium text-gray-800 justify-center bg-white">
       Built with Love, from <span class="font-bold">&nbsp;Hadi</span>, for <span class="font-bold">&nbsp;Dini</span>.
     </div>
+    @endif
   @endauth
   <script>
     // Mobile menu toggle
